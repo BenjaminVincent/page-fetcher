@@ -1,4 +1,4 @@
-/* 
+/*
 
 [ ] takes a URL as a commandline argument
 [ ] as well as a local file path
@@ -9,8 +9,6 @@
 
 const request = require('request');
 const fs = require('fs');
-const isValid = require('is-valid-path');
-//const filesize = require("filesize"); 
 
 const args = process.argv.slice(2);
 
@@ -18,17 +16,15 @@ let URL = args[0];
 let PATH = args[1];
 
 
-
-
 request(URL, (error, response, body) => {
   if (response && response.statusCode === 200) {
-    fs.writeFile(PATH, body, function (err) {
+    fs.writeFile(PATH, body, function(err) {
   
       if (err) console.log("Invalid input");
       else if (error) console.log("INVALID URL");
       else {
         console.log('Saved!');
-        let stats = fs.statSync(PATH);    
+        let stats = fs.statSync(PATH);
         console.log(`Downloaded and saved ${stats.size} bytes to ${PATH}`);
       }
   
@@ -37,11 +33,4 @@ request(URL, (error, response, body) => {
     console.log("beg coneect");
   }
 
-
 });
-
-
-
-//console.log(URL + "\n" + PATH);
-
-// node fetcher.js http://google.com /vagrant/w2/d3-net/page-fetcher/indexOut.html
